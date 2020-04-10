@@ -1,0 +1,149 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# cadoe
+
+<!-- badges: start -->
+
+<!-- badges: end -->
+
+The goal of cadoe is to easily download files from the [California
+Department of Education.](https://www.cde.ca.gov/ds/sd/sd/)
+
+## Installation
+
+You can install the released version of cadoe from GitHub with:
+
+``` r
+remotes::install_github("ir-sfsu/cadoe")
+```
+
+## Enrollment Data
+
+This is a basic example which shows you how to solve a common problem:
+
+``` r
+library(cadoe)
+library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
+enr178 <- get_school_enr_data("2017-18")
+#> Parsed with column specification:
+#> cols(
+#>   .default = col_double(),
+#>   COUNTY = col_character(),
+#>   DISTRICT = col_character(),
+#>   SCHOOL = col_character(),
+#>   GENDER = col_character()
+#> )
+#> See spec(...) for full column specifications.
+glimpse(enr178)
+#> Observations: 130,194
+#> Variables: 23
+#> $ CDS_CODE  <dbl> 1.964593e+13, 1.964593e+13, 1.964593e+13, 1.964593e+13…
+#> $ COUNTY    <chr> "Los Angeles", "Los Angeles", "Los Angeles", "Los Ange…
+#> $ DISTRICT  <chr> "Hawthorne", "Hawthorne", "Hawthorne", "Hawthorne", "H…
+#> $ SCHOOL    <chr> "Ramona", "Ramona", "Ramona", "Ramona", "Ramona", "Ram…
+#> $ ETHNIC    <dbl> 2, 6, 0, 4, 9, 7, 2, 4, 3, 1, 6, 5, 5, 9, 3, 7, 2, 5, …
+#> $ GENDER    <chr> "F", "M", "F", "F", "M", "F", "M", "M", "M", "M", "F",…
+#> $ KDGN      <dbl> 2, 8, 0, 0, 2, 2, 2, 1, 1, 0, 4, 61, 58, 2, 0, 3, 2, 4…
+#> $ GR_1      <dbl> 2, 6, 1, 1, 0, 3, 1, 0, 1, 3, 10, 49, 60, 1, 0, 2, 1, …
+#> $ GR_2      <dbl> 3, 10, 0, 0, 0, 3, 1, 0, 1, 0, 7, 44, 41, 0, 1, 6, 1, …
+#> $ GR_3      <dbl> 1, 5, 0, 0, 3, 5, 0, 0, 0, 0, 6, 35, 47, 0, 0, 3, 1, 3…
+#> $ GR_4      <dbl> 1, 10, 1, 0, 0, 3, 1, 1, 0, 0, 5, 48, 58, 1, 1, 3, 1, …
+#> $ GR_5      <dbl> 3, 7, 0, 0, 0, 2, 1, 1, 0, 0, 7, 51, 51, 0, 1, 2, 2, 4…
+#> $ GR_6      <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+#> $ GR_7      <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+#> $ GR_8      <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+#> $ UNGR_ELM  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+#> $ GR_9      <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+#> $ GR_10     <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+#> $ GR_11     <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+#> $ GR_12     <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+#> $ UNGR_SEC  <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+#> $ ENR_TOTAL <dbl> 12, 46, 2, 1, 5, 18, 6, 3, 3, 3, 39, 288, 315, 4, 3, 1…
+#> $ ADULT     <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+```
+
+## Discipline Data
+
+``` r
+suspensions1718 <- get_school_discipline_data("1718", "susp")
+glimpse(suspensions1718)
+#> Observations: 355,504
+#> Variables: 21
+#> $ AcademicYear                                               <chr> "2017…
+#> $ AggregateLevel                                             <chr> "C", …
+#> $ CountyCode                                                 <chr> "01",…
+#> $ DistrictCode                                               <chr> NA, N…
+#> $ SchoolCode                                                 <chr> NA, N…
+#> $ CountyName                                                 <chr> "Alam…
+#> $ DistrictName                                               <chr> NA, N…
+#> $ SchoolName                                                 <chr> NA, N…
+#> $ CharterYN                                                  <chr> "No",…
+#> $ ReportingCategory                                          <chr> "GF",…
+#> $ `Cumulative Enrollment`                                    <chr> "1037…
+#> $ `Total Suspensions`                                        <chr> "2706…
+#> $ `Unduplicated Count of Students Suspended (Total)`         <chr> "1867…
+#> $ `Unduplicated Count of Students Suspended (Defiance-Only)` <chr> "277"…
+#> $ `Suspension Rate (Total)`                                  <chr> "1.8"…
+#> $ `Suspension Count Violent Incident (Injury)`               <chr> "600"…
+#> $ `Suspension Count Violent Incident (No Injury)`            <chr> "1134…
+#> $ `Suspension Count Weapons Possession`                      <chr> "48",…
+#> $ `Suspension Count Illicit Drug-Related`                    <chr> "431"…
+#> $ `Suspension Count Defiance-Only`                           <chr> "377"…
+#> $ `Suspension Count Other Reasons`                           <chr> "116"…
+```
+
+## Graduation Data
+
+``` r
+ucgrads178 <- get_school_grad_data("2017-18", "UCGradEth")
+#> Parsed with column specification:
+#> cols(
+#>   CDS_CODE = col_character(),
+#>   COUNTY = col_character(),
+#>   DISTRICT = col_character(),
+#>   SCHOOL = col_character(),
+#>   HISPANIC = col_character(),
+#>   AM_IND = col_character(),
+#>   ASIAN = col_character(),
+#>   PAC_ISLD = col_character(),
+#>   FILIPINO = col_character(),
+#>   AFRICAN_AM = col_character(),
+#>   WHITE = col_character(),
+#>   TWO_MORE_RACES = col_character(),
+#>   NOT_REPORTED = col_character(),
+#>   TOTAL = col_character(),
+#>   YEAR = col_character()
+#> )
+glimpse(ucgrads178)
+#> Observations: 0
+#> Variables: 15
+#> $ CDS_CODE       <chr> 
+#> $ COUNTY         <chr> 
+#> $ DISTRICT       <chr> 
+#> $ SCHOOL         <chr> 
+#> $ HISPANIC       <chr> 
+#> $ AM_IND         <chr> 
+#> $ ASIAN          <chr> 
+#> $ PAC_ISLD       <chr> 
+#> $ FILIPINO       <chr> 
+#> $ AFRICAN_AM     <chr> 
+#> $ WHITE          <chr> 
+#> $ TWO_MORE_RACES <chr> 
+#> $ NOT_REPORTED   <chr> 
+#> $ TOTAL          <chr> 
+#> $ YEAR           <chr>
+```
+
+## Future work
+
+  - More files
+  - Harmonize year arguments…

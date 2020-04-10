@@ -1,0 +1,57 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# cadoe
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of cadoe is to easily download files from the [California Department of Education.](https://www.cde.ca.gov/ds/sd/sd/)
+
+## Installation
+
+You can install the released version of cadoe from GitHub with:
+
+``` r
+remotes::install_github("ir-sfsu/cadoe")
+```
+
+## Enrollment Data
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r}
+library(cadoe)
+library(dplyr)
+enr178 <- get_school_enr_data("2017-18")
+glimpse(enr178)
+```
+
+## Discipline Data
+
+```{r}
+suspensions1718 <- get_school_discipline_data("1718", "susp")
+glimpse(suspensions1718)
+```
+
+## Graduation Data
+
+```{r}
+ucgrads178 <- get_school_grad_data("2017-18", "UCGradEth")
+glimpse(ucgrads178)
+```
+
+## Future work
+* More files
+* Harmonize year arguments...
